@@ -1,0 +1,82 @@
+# Karka Rest Api - v3
+#   Reference: 
+
+###https://docs.confluent.io/platform/current/kafka-rest/api.html#crest-long-api-reference
+@hostname = localhost
+
+### Topic Create ###
+
+POST http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/topics HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "topic_name": "my-topic-1",
+    "partitions_count": 3,
+    "replication_factor": 1,
+    "configs": [
+        {
+            "name": "cleanup.policy",
+            "value": "compact"
+        },
+        {
+            "name": "compression.type",
+            "value": "gzip"
+        }
+    ]
+}
+
+###  Topic Info ###
+
+GET http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/topics/my-topic-1 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###  Produce Records ###
+
+POST http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/topics/my-topic-1/records HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "partition_id": 1,
+    "headers": [
+        {
+            "name": "Header-1",
+            "value": "SGVhZGVyLTE="
+        },
+        {
+            "name": "Header-2",
+            "value": "SGVhZGVyLTI="
+        }
+    ],
+    "key": {
+        "type": "AVRO",
+        "subject": "my-topic-1-key",
+        "schema": "{\"type\":\"string\"}",
+        "data": "key-01"
+    },
+    "value": {
+        "type": "AVRO",
+        "subject": "my-topic-1-value",
+        "schema": "{\"type\":\"string\"}",
+        "data": "value-01"
+    },
+    "timestamp": "2021-02-05T19:14:42Z"
+}
+
+
+###  Topic Delete ###
+
+DELETE  http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/topics/my-topic-1 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Schema Delete - Soft
+#   Schema Api: https://docs.confluent.io/platform/current/schema-registry/develop/api.html
+#   Deleting Schema: https://docs.confluent.io/platform/current/schema-registry/schema-deletion-guidelines.html#soft-delete-a-schema
+
+DELETE  http://{{hostname}}:8081/subjects/my-topic-1 HTTP/1.1
+Accept: application/vnd.schemaregistry.v1+json
+
+###

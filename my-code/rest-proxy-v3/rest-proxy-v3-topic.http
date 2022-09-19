@@ -1,0 +1,47 @@
+# Karka Rest Api - v3
+#   Reference: 
+
+###https://docs.confluent.io/platform/current/kafka-rest/api.html#crest-long-api-reference
+@hostname = localhost
+
+### Topic List ###
+
+GET http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/topics HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Topic Create ###
+
+POST http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/topics HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "topic_name": "my-topic-1",
+    "partitions_count": 3,
+    "replication_factor": 1,
+    "configs": [
+        {
+            "name": "cleanup.policy",
+            "value": "compact"
+        },
+        {
+            "name": "compression.type",
+            "value": "gzip"
+        }
+    ]
+}
+
+###  Topic Info ###
+
+GET http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/topics/my-topic-1 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###  Topic Delete ###
+
+DELETE  http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/topics/my-topic-1 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###

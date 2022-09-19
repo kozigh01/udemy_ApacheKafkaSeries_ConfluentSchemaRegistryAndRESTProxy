@@ -1,0 +1,95 @@
+# Karka Rest Api - v3
+#   Reference: 
+
+###https://docs.confluent.io/platform/current/kafka-rest/api.html#crest-long-api-reference
+@hostname = localhost
+
+### Clusters ###
+
+# @name resp
+GET http://{{hostname}}:8082/v3/clusters HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+@myvar = {{resp.response.body.kind}}
+{{myvar}}
+
+### Cluster Broker Configs ###
+# Note: can also alter/update/delete broker-configs 
+#   - https://docs.confluent.io/platform/current/kafka-rest/api.html#post--clusters-cluster_id-broker-configs-alter
+
+GET http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/broker-configs HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Topic List ###
+
+GET http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/topics HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Topic Create ###
+
+POST http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/topics HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "topic_name": "my-topic-1",
+    "partitions_count": 3,
+    "replication_factor": 1,
+    "configs": [
+        {
+            "name": "cleanup.policy",
+            "value": "compact"
+        },
+        {
+            "name": "compression.type",
+            "value": "gzip"
+        }
+    ]
+}
+
+###  Topic Info ###
+
+GET http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/topics/my-topic-1 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###  Topic Delete ###
+
+DELETE  http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/topics/my-topic-1 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###  Consumer Group List ###
+
+GET  http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/consumer-groups HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###  Consumer Group Details ###
+
+GET  http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/consumer-groups/_confluent-controlcenter-7-2-1-1 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###  Consumer Group List Consumers ###
+
+GET  http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/consumer-groups/_confluent-controlcenter-7-2-1-1/consumers HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###  Consumer Group Lag Summary ###
+
+GET  http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/consumer-groups/_confluent-controlcenter-7-2-1-1/lag-summary HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###  Consumer Group - List Consumer Lags ###
+
+GET  http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/consumer-groups/_confluent-controlcenter-7-2-1-1/lags HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###

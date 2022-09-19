@@ -1,0 +1,68 @@
+# Kafka Schema Api - v1
+#   Reference: 
+
+###https://docs.confluent.io/platform/current/kafka-rest/api.html#crest-long-api-reference
+@hostname = localhost
+
+### Global compatibility level
+
+GET http://{{hostname}}:8081/config HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Subject compatibility level
+
+GET http://{{hostname}}:8081/config/topic-1-key HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Schema string
+
+GET http://{{hostname}}:8081/schemas/ids/1 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Schema versions
+
+GET http://{{hostname}}:8081/schemas/ids/1/versions HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Schema types
+
+GET http://{{hostname}}:8081/schemas/types HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Subject List
+
+GET http://{{hostname}}:8081/subjects HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Subject Versions
+
+GET http://{{hostname}}:8081/subjects/topic-1-key/versions HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Schema Schema Version Detail
+
+GET http://{{hostname}}:8081/subjects/topic-1-key/versions/1 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Schema Schema Version Schema only
+
+GET http://{{hostname}}:8081/subjects/topic-1-key/versions/1/schema HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+### Schema Delete - Soft
+#   Schema Api: https://docs.confluent.io/platform/current/schema-registry/develop/api.html
+#   Deleting Schema: https://docs.confluent.io/platform/current/schema-registry/schema-deletion-guidelines.html#soft-delete-a-schema
+
+DELETE  http://{{hostname}}:8081/subjects/my-topic-1-value HTTP/1.1
+Accept: application/vnd.schemaregistry.v1+json
+
+###

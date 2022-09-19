@@ -1,0 +1,50 @@
+# Karka Rest Api - v3
+#   Reference: 
+
+###https://docs.confluent.io/platform/current/kafka-rest/api.html#crest-long-api-reference
+@hostname = localhost
+
+###  Consumer Group List ###
+
+GET  http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/consumer-groups HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###  Consumer Group Details ###
+
+GET  http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/consumer-groups/_confluent-controlcenter-7-2-1-1 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###  Consumer Group List Consumers ###
+
+GET  http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/consumer-groups/_confluent-controlcenter-7-2-1-1/consumers HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###  Consumer Group Lag Summary ###
+
+GET  http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/consumer-groups/_confluent-controlcenter-7-2-1-1/lag-summary HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###  Consumer Group - List Consumer Lags ###
+
+GET  http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/consumer-groups/_confluent-controlcenter-7-2-1-1/lags HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###  Consumer Group - Get Consumer Partition Assignments ###
+
+GET  http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/consumer-groups/_confluent-controlcenter-7-2-1-1/consumers/_confluent-controlcenter-7-2-1-1-19101cbf-2d12-4a56-90e6-a6964d028044-StreamThread-1-consumer-ec10405a-4b92-4ee9-a6e3-cba4591e32ce/assignments HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###
+
+curl \
+    --request GET \
+    --url http://localhost:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/consumer-groups/_confluent-controlcenter-7-2-1-1/lags \
+    --header 'accept: application/json' \
+    --header 'content-type: application/json' \
+    --header 'user-agent: vscode-restclient'

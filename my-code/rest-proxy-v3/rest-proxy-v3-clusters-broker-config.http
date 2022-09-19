@@ -1,0 +1,25 @@
+# Karka Rest Api - v3
+#   Reference: 
+
+###https://docs.confluent.io/platform/current/kafka-rest/api.html#crest-long-api-reference
+@hostname = localhost
+
+### Clusters ###
+
+# @name resp
+GET http://{{hostname}}:8082/v3/clusters HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+@myvar = {{resp.response.body.kind}}
+{{myvar}}
+
+### Cluster Broker Configs ###
+# Note: can also alter/update/delete broker-configs 
+#   - https://docs.confluent.io/platform/current/kafka-rest/api.html#post--clusters-cluster_id-broker-configs-alter
+
+GET http://{{hostname}}:8082/v3/clusters/7Mi9jUfWQRSqQ7zyro7CIA/broker-configs HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###
